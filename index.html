@@ -1405,7 +1405,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">6.4k</span>
+                <span title="本文字数">13k</span>
               
 
               
@@ -1417,7 +1417,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">12 分钟</span>
+                <span title="阅读时长">23 分钟</span>
               
             </div>
           
@@ -1441,11 +1441,11 @@
           <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li>《C和指针》第15章</li>
 <li>apue 第5章</li>
-<li><a href="https://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams" target="_blank" rel="noopener">https://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams</a></li>
+<li><a href="https://www.gnu.org/software/libc/manual/html_node/I_002fO-on-Streams.html#I_002fO-on-Streams" target="_blank" rel="noopener">Input/Output on Streams</a></li>
 </ul>
 <h1 id="低级IO与标准IO的区别？"><a href="#低级IO与标准IO的区别？" class="headerlink" title="低级IO与标准IO的区别？"></a>低级IO与标准IO的区别？</h1><p><a href="https://www.cnblogs.com/shengge/articles/2033129.html" target="_blank" rel="noopener">fopen /open，read/write和fread/fwrite区别</a></p>
-<p>标准IO函数库的函数是对系统调用IO函数的进一步封装(可以通过strace验证)。<br>系统调用IO函数属于底层函数，可以做更多底层的操作。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fgetc =&gt; read</span><br><span class="line">fgets =&gt; read</span><br><span class="line"></span><br><span class="line">fputc =&gt; write</span><br><span class="line">fput s=&gt; write</span><br></pre></td></tr></table></figure>
+<p>标准IO：标准IO函数是对低级IO函数的进一步封装(可以通过strace验证)。<br>低级IO：低级IO函数属于底层函数，可以做更多底层的操作，但是很多东西需要规范(标准IO做的事情，如：引入标准IO缓存区)。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 标准IO函数的对应的底层IO操作。</span></span><br><span class="line"><span class="comment">// =&gt;表示对应关系</span></span><br><span class="line">fgetc =&gt; read</span><br><span class="line">fgets =&gt; read</span><br><span class="line"></span><br><span class="line">fputc =&gt; write</span><br><span class="line"><span class="built_in">fputs</span> =&gt; write</span><br></pre></td></tr></table></figure>
 <h1 id="流（Stream）"><a href="#流（Stream）" class="headerlink" title="流（Stream）"></a>流（Stream）</h1><ul>
 <li>《c和指针》15.4  </li>
 <li>apue 5.2  </li>
@@ -1460,7 +1460,7 @@
 <h2 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h2><ul>
 <li>用于输入的流叫输入流。</li>
 <li>用于输出的流叫输出流。</li>
-<li>用于文件操作的流叫文件流(FILE)。
+<li>用于文件操作的流叫文件流。
           <!--noindex-->
           
             <div class="post-button text-center">

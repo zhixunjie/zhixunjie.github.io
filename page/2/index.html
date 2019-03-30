@@ -1107,7 +1107,7 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                <span title="本文字数">18k</span>
+                <span title="本文字数">19k</span>
               
 
               
@@ -1119,7 +1119,7 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                <span title="阅读时长">33 分钟</span>
+                <span title="阅读时长">35 分钟</span>
               
             </div>
           
@@ -1140,37 +1140,40 @@
 
       
         
-          <h1 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+          <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li>apue</li>
+<li><a href="https://www.gnu.org/software/libc/manual/html_node/Low_002dLevel-I_002fO.html#Low_002dLevel-I_002fO" target="_blank" rel="noopener">Low-Level Input/Output</a></li>
+<li><a href="https://www.gnu.org/software/libc/manual/html_node/File-System-Interface.html#File-System-Interface" target="_blank" rel="noopener">File System Interface</a></li>
+</ul>
+<h1 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h1><h2 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>apue第三章</li>
-<li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html" target="_blank" rel="noopener">http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html</a> </li>
+<li><a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html" target="_blank" rel="noopener">fcntl.h</a></li>
 <li><a href="http://cn.linux.vbird.org/linux_basic/0220filemanager.php#dir_pathway" target="_blank" rel="noopener">绝对路径和相对路径</a></li>
 </ul>
-<h2 id="文件描述符（file-descriptor-简称fd）"><a href="#文件描述符（file-descriptor-简称fd）" class="headerlink" title="文件描述符（file descriptor,简称fd）"></a>文件描述符（file descriptor,简称fd）</h2><ul>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><ul>
 <li>apue 3.2</li>
 <li><a href="http://www.gnu.org/software/libc/manual/html_node/Streams-and-File-Descriptors.html#Streams-and-File-Descriptors" target="_blank" rel="noopener">http://www.gnu.org/software/libc/manual/html_node/Streams-and-File-Descriptors.html#Streams-and-File-Descriptors</a> </li>
 <li><a href="https://www.gnu.org/software/libc/manual/html_mono/libc.html#Streams-and-File-Descriptors" target="_blank" rel="noopener">文件描述符</a></li>
 </ul>
+<hr>
+<p>文件描述符，file descriptor，简称fd。</p>
 <blockquote>
 <p>When you want to do input or output to a file, you have a choice of two basic mechanisms for representing the connection between your program and the file: file descriptors and streams. File descriptors are represented as objects of type int, while streams are represented as FILE * objects.</p>
-</blockquote>
 <p>linux中两种机制去处理文件，fd(int类型) 和streams(FILE*类型)。<br>fd跟windows的句柄、标准IO函数库的FILE都是一个作用，用于标识文件，通过它们进行文件操作。</p>
-<p>在 UNIX 操作系统中，所有的外围设备(包括键盘和显示器)都被看作是文件系统中的文件。因此，这些设备的输入/输出其实都是通过文件读/写操作完成。</p>
-<p>另外，像socket、管道等的读取也可以看做是文件的读取。</p>
+</blockquote>
+<p>在 UNIX 操作系统中，所有的外围设备(包括键盘和显示器)都被看作是文件系统中的文件。因此，这些设备的输入/输出其实都是通过文件读/写操作完成。<br>另外，像socket、管道等的读取也可以看做是文件的读取。</p>
 <h3 id="fd和FILE"><a href="#fd和FILE" class="headerlink" title="fd和FILE"></a>fd和FILE</h3><p>linux系统调用的文件操作函数是用fd去操作的，如，read，write等函数。<br>标准IO函数库的文件操作函数是用流（FILE）去操作的，如，fread，fwrite等函数。</p>
 <blockquote>
-<p>fd可以在FILE结构体中获取得到。</p>
+<ol>
+<li>可以通过fileno函数，获取FILE对象的fd值。</li>
+<li>也可以通过fd值转换为FILE对象。</li>
+</ol>
 </blockquote>
-<h3 id="stdin-stdout-stderr"><a href="#stdin-stdout-stderr" class="headerlink" title="stdin/stdout/stderr"></a>stdin/stdout/stderr</h3><ul>
+<h3 id="标准输入、标准输出、标准错误"><a href="#标准输入、标准输出、标准错误" class="headerlink" title="标准输入、标准输出、标准错误"></a>标准输入、标准输出、标准错误</h3><ul>
 <li>对应的fd宏：STDIN_FILENO、STDOUT_FILENO、STDERR_FILENO</li>
 <li>对应的FILE宏：stdin、stdout、stderr</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redirect.c</span></span><br><span class="line"><span class="comment"> * 如何理解stdin/stdout/stderr？</span></span><br><span class="line"><span class="comment"> * 从文件的角度去理解stdin/stdout/stderr.</span></span><br><span class="line"><span class="comment"> * stdin/stdout/stderr的fd值其实是通过open函数打开某个设备文件而返回的，并且打开时指定为可读写.(设备也是其中一种文件类型)</span></span><br><span class="line"><span class="comment"> * 设备文件的路径可以查看/dev目录。</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/0", O_RDWR);//标准输入打开的文件</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/1", O_RDWR);//标准输出打开的文件</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/2", O_RDWR);//标准错误输出打开的文件</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 如何理解重定向？(可以使用strace观察执行过程)</span></span><br><span class="line"><span class="comment"> * 1. fd=0,1,2时,默认的输入源是键盘,默认的输出地是屏幕.</span></span><br><span class="line"><span class="comment"> * 2. 由于它们在open时被指定为可读写,所以他们都可以调用read和write函数,read的数据来自键盘,write的数据输出到屏幕.</span></span><br><span class="line"><span class="comment"> * 3. ./test/main.out &lt; a.txt  &lt;符号改变fd等于0的输入源,read</span></span><br><span class="line"><span class="comment"> * 4. ./test/main.out 1&gt; a.txt  &gt;符号改变fd等于1的输出地,write</span></span><br><span class="line"><span class="comment"> * 5. ./test/main.out 2&gt; a.txt  &gt;符号改变fd等于2的输出地,write</span></span><br><span class="line"><span class="comment"> * 6. ./test/main.out &lt;&gt; a.txt  相当于&lt;和&gt;符合的组合效果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFSIZE 4096</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> buf[BUFSIZE];</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line"></span><br><span class="line">    fd = STDIN_FILENO;  <span class="comment">// 标准输入,    状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"><span class="comment">//    fd = STDOUT_FILENO; // 标准输出,    状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"><span class="comment">//    fd = STDERR_FILENO; // 标准错误输出, 状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入字符串:\n"</span>);</span><br><span class="line">    n = read(fd, buf, BUFSIZE);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"读取%d字节\n"</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//写入</span></span><br><span class="line">    <span class="built_in">strcpy</span>(buf, <span class="string">"hello world"</span>);</span><br><span class="line">    n = write(fd, buf, <span class="built_in">strlen</span>(buf));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n写入%d字节\n"</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="函数open"><a href="#函数open" class="headerlink" title="函数open"></a>函数open</h2><p>打开/创建文件。</p>
-<h3 id="open与openat的区别"><a href="#open与openat的区别" class="headerlink" title="open与openat的区别"></a>open与openat的区别</h3><p><a href="http://www.bubuko.com/infodetail-2270848.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-2270848.html</a> </p>
-<ul>
-<li>openat比open多了一个fd参数.</li>
-<li>如果路径是绝对路径，fd参数可以忽略。</li>
-<li>如果路径是相对路径，并且fd的值不等于AT_FDCWD，那么openat的相对路径参照的是fd的路径，否则，参照的是进程的当前工作目录。
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * redirect.c</span></span><br><span class="line"><span class="comment"> * 如何理解stdin/stdout/stderr？</span></span><br><span class="line"><span class="comment"> * 从文件的角度去理解stdin/stdout/stderr.</span></span><br><span class="line"><span class="comment"> * stdin/stdout/stderr的fd值其实是通过open函数打开某个设备文件而返回的，并且打开时指定为可读写.(设备也是其中一种文件类型)</span></span><br><span class="line"><span class="comment"> * 设备文件的路径可以查看/dev目录。</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/0", O_RDWR);//标准输入打开的文件</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/1", O_RDWR);//标准输出打开的文件</span></span><br><span class="line"><span class="comment"> * fd = open("/dev/fd/2", O_RDWR);//标准错误输出打开的文件</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 如何理解重定向？(可以使用strace观察执行过程)</span></span><br><span class="line"><span class="comment"> * 1. fd=0,1,2时,默认的输入源是键盘,默认的输出地是屏幕.</span></span><br><span class="line"><span class="comment"> * 2. 由于它们在open时被指定为可读写,所以他们都可以调用read和write函数,read的数据来自键盘,write的数据输出到屏幕.</span></span><br><span class="line"><span class="comment"> * 3. ./test/main.out &lt; a.txt   &lt;符号改变fd等于0的输入源,read的源</span></span><br><span class="line"><span class="comment"> * 4. ./test/main.out 1&gt; a.txt  &gt;符号改变fd等于1的输出地,write的目的地</span></span><br><span class="line"><span class="comment"> * 5. ./test/main.out 2&gt; a.txt  &gt;符号改变fd等于2的输出地,write的目的地</span></span><br><span class="line"><span class="comment"> * 6. ./test/main.out &lt;&gt; a.txt  &lt;&gt;符号相当于&lt;和&gt;符合的组合效果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUFSIZE 4096</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">char</span> buf[BUFSIZE];</span><br><span class="line">    <span class="keyword">int</span> fd;</span><br><span class="line"></span><br><span class="line">    fd = STDIN_FILENO;  <span class="comment">// 标准输入,    状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"><span class="comment">//    fd = STDOUT_FILENO; // 标准输出,    状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"><span class="comment">//    fd = STDERR_FILENO; // 标准错误输出, 状态标志等于：可读写(fcntl函数测试出来)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入字符串:\n"</span>);</span><br><span class="line">    n = read(fd, buf, BUFSIZE);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"读取%d字节\n"</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//写入</span></span><br><span class="line">    <span class="built_in">strcpy</span>(buf, <span class="string">"hello world"</span>);</span><br><span class="line">    n = write(fd, buf, <span class="built_in">strlen</span>(buf));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n写入%d字节\n"</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1182,7 +1185,7 @@
           <!--/noindex-->
         
       
-    </li></ul></div>
+    </div>
 
     
 
